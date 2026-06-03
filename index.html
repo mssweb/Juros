@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>DPE - Calc - Análise Inteligente de Juros</title>
+    <title>DPE-CALC - Análise de Juros | Defensoria Pública RS</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #003399 0%, #0047ab 50%, #002266 100%);
             min-height: 100vh;
             padding: 2rem 1rem;
         }
@@ -25,7 +25,7 @@
             margin: 0 auto;
         }
 
-        /* Header Moderno */
+        /* Header Moderno - Cores DPE/RS */
         .hero {
             text-align: center;
             margin-bottom: 3rem;
@@ -35,23 +35,26 @@
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, #e0d7ff 100%);
+            background: linear-gradient(135deg, #ffcc00 0%, #ffb612 50%, #ff8c00 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero .badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.9rem;
-            color: white;
+            color: #ffcc00;
             margin-bottom: 1rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,204,0,0.3);
         }
 
         .hero p {
@@ -73,7 +76,7 @@
         }
 
         .card-header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #002266 0%, #003399 50%, #0047ab 100%);
             padding: 2rem;
             color: white;
         }
@@ -84,8 +87,13 @@
             margin-bottom: 0.5rem;
         }
 
+        .card-header h2 i {
+            color: #ffcc00;
+            margin-right: 10px;
+        }
+
         .card-header p {
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .card-body {
@@ -108,7 +116,7 @@
 
         .input-group label {
             font-weight: 600;
-            color: #1e293b;
+            color: #002266;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -116,7 +124,7 @@
 
         .input-group label i {
             margin-right: 8px;
-            color: #667eea;
+            color: #003399;
         }
 
         .input-group input,
@@ -133,8 +141,8 @@
         .input-group input:focus,
         .input-group select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 3px rgba(255,204,0,0.2);
         }
 
         /* Tabela de Taxas Moderna */
@@ -153,7 +161,7 @@
         }
 
         .taxas-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #003399 0%, #002266 100%);
             color: white;
             padding: 1rem;
             font-weight: 600;
@@ -179,7 +187,7 @@
         }
 
         .taxas-table input:focus {
-            border-color: #667eea;
+            border-color: #ffcc00;
             outline: none;
         }
 
@@ -188,7 +196,7 @@
             cursor: pointer;
         }
 
-        /* Botões Arrojados */
+        /* Botões com cores DPE */
         .button-group {
             display: flex;
             gap: 1rem;
@@ -213,50 +221,57 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #003399 0%, #0047ab 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+            box-shadow: 0 4px 15px rgba(0,51,153,0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102,126,234,0.5);
+            background: linear-gradient(135deg, #0047ab 0%, #0055cc 100%);
+            box-shadow: 0 6px 20px rgba(0,51,153,0.5);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(245,158,11,0.3);
+            background: linear-gradient(135deg, #ffb612 0%, #ffcc00 100%);
+            color: #002266;
+            box-shadow: 0 4px 15px rgba(255,182,18,0.3);
         }
 
         .btn-secondary:hover {
             transform: translateY(-2px);
+            background: linear-gradient(135deg, #ffcc00 0%, #ffd633 100%);
+            box-shadow: 0 6px 20px rgba(255,182,18,0.4);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid #e2e8f0;
-            color: #1e293b;
+            border: 2px solid #003399;
+            color: #003399;
         }
 
         .btn-outline:hover {
-            border-color: #667eea;
-            background: rgba(102,126,234,0.05);
+            background: rgba(0,51,153,0.05);
+            border-color: #ffcc00;
         }
 
         /* Conclusão Card */
         .conclusion-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8efff 100%);
             border-radius: 1.5rem;
             padding: 2rem;
             margin-top: 2rem;
-            border-left: 5px solid #667eea;
+            border-left: 5px solid #ffcc00;
         }
 
         .conclusion-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #1e293b;
+            color: #002266;
+        }
+
+        .conclusion-card h3 i {
+            color: #ffcc00;
         }
 
         .conclusion-card .veredito {
@@ -266,7 +281,7 @@
         }
 
         .conclusion-card .detalhes {
-            color: #475569;
+            color: #333333;
             line-height: 1.6;
         }
 
@@ -277,7 +292,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,51,153,0.9);
             backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
@@ -294,16 +309,27 @@
 
         .loading-spinner i {
             font-size: 3rem;
-            color: #667eea;
+            color: #003399;
             animation: spin 1s linear infinite;
         }
 
-        /* Footer */
+        /* Footer DPE */
         .footer {
             margin-top: 3rem;
             text-align: center;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-size: 0.85rem;
+            padding: 1rem;
+            border-top: 1px solid rgba(255,204,0,0.2);
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
 
         /* Animações */
@@ -359,60 +385,75 @@
         .severity-high {
             color: #ef4444;
         }
+
+        /* Selo DPE */
+        .dpe-selo {
+            display: inline-block;
+            background: rgba(255,204,0,0.15);
+            border-radius: 10px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            color: #ffcc00;
+            margin-left: 10px;
+            vertical-align: middle;
+            font-weight: normal;
+        }
     </style>
 </head>
 <body>
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner">
             <i class="fas fa-spinner"></i>
-            <p style="margin-top: 1rem;">Consultando dados do BACEN...</p>
+            <p style="margin-top: 1rem; color: #003399;">Consultando dados do BACEN...</p>
         </div>
     </div>
 
     <div class="container">
         <div class="hero">
             <div class="badge">
-                <i class="fas fa-gavel"></i> Análise Jurídica Inteligente
+                <i class="fas fa-gavel"></i> Defensoria Pública do Estado do Rio Grande do Sul
             </div>
-            <h1>JusticeCalc</h1>
-            <p>Análise automatizada de abusividade de juros com dados oficiais do Banco Central</p>
+            <h1>DPE-CALC <span class="dpe-selo">v1.0</span></h1>
+            <p>Análise automatizada de abusividade de juros com dados oficiais do Banco Central<br>
+            <strong style="color: #ffcc00;">NUDECONTU - Núcleo de Defesa do Consumidor e Tutelas Coletivas</strong></p>
         </div>
 
         <div class="card">
             <div class="card-header">
                 <h2><i class="fas fa-file-contract"></i> Dados do Contrato</h2>
-                <p>Preencha as informações abaixo para análise preliminar</p>
+                <p>Preencha as informações abaixo para análise preliminar (dados protegidos pela LGPD)</p>
             </div>
             <div class="card-body">
                 <div class="form-grid">
                     <div class="input-group">
                         <label><i class="fas fa-user"></i> Nome do Cliente</label>
-                        <input type="text" id="nomeCliente" placeholder="Opcional">
+                        <input type="text" id="nomeCliente" placeholder="Opcional - não será armazenado">
                     </div>
                     <div class="input-group">
                         <label><i class="fas fa-id-card"></i> CPF</label>
                         <input type="text" id="cpf" placeholder="000.000.000-00">
                     </div>
                     <div class="input-group">
-                        <label><i class="fas fa-university"></i> Instituição</label>
-                        <input type="text" id="instituicao" placeholder="Ex: Banco do Brasil">
+                        <label><i class="fas fa-university"></i> Instituição Financeira</label>
+                        <input type="text" id="instituicao" placeholder="Ex: Banco do Brasil, Itaú, etc">
                     </div>
                     <div class="input-group">
-                        <label><i class="fas fa-hashtag"></i> Contrato</label>
-                        <input type="text" id="contrato" placeholder="Número do contrato">
+                        <label><i class="fas fa-hashtag"></i> Número do Contrato</label>
+                        <input type="text" id="contrato" placeholder="Número do contrato/Banco">
                     </div>
                     <div class="input-group">
                         <label><i class="fas fa-calendar"></i> Data da Contratação</label>
                         <input type="date" id="dataContratacao">
                     </div>
                     <div class="input-group">
-                        <label><i class="fas fa-chart-line"></i> Modalidade</label>
+                        <label><i class="fas fa-chart-line"></i> Modalidade do Crédito</label>
                         <select id="modalidade">
                             <option value="1">Crédito Pessoal</option>
                             <option value="2">Cheque Especial</option>
                             <option value="3">Cartão de Crédito</option>
-                            <option value="4">Financiamento Veículo</option>
+                            <option value="4">Financiamento de Veículo</option>
                             <option value="5">Financiamento Imobiliário</option>
+                            <option value="6">Crédito Consignado</option>
                         </select>
                     </div>
                 </div>
@@ -425,13 +466,13 @@
                         <tbody>
                             <tr style="background: #fef3c7;">
                                 <td colspan="2"><strong><i class="fas fa-file-signature"></i> Taxa Contratual</strong></td>
-                                <td><input type="number" id="taxaMensalContratual" step="0.01" placeholder="Digite a taxa mensal"></td>
+                                <td><input type="number" id="taxaMensalContratual" step="0.01" placeholder="Digite a taxa mensal" style="border-color: #ffcc00;"></td>
                                 <td><input type="number" id="taxaAnualContratual" readonly placeholder="Será calculado"></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><strong><i class="fas fa-chart-line"></i> Média BACEN</strong></td>
-                                <td><input type="text" id="taxaMensalBACEN" readonly placeholder="Automático"></td>
-                                <td><input type="text" id="taxaAnualBACEN" readonly placeholder="Automático"></td>
+                                <td><input type="text" id="taxaMensalBACEN" readonly placeholder="Será consultado"></td>
+                                <td><input type="text" id="taxaAnualBACEN" readonly placeholder="Será consultado"></td>
                             </tr>
                             <tr style="background: #f0fdf4;">
                                 <td colspan="2"><strong><i class="fas fa-flag-checkered"></i> Parâmetro Abusividade (20%)</strong></td>
@@ -455,7 +496,7 @@
                         <i class="fas fa-eraser"></i> LIMPAR
                     </button>
                     <button class="btn btn-outline" onclick="window.print()">
-                        <i class="fas fa-print"></i> IMPRIMIR
+                        <i class="fas fa-print"></i> IMPRIMIR / PDF
                     </button>
                 </div>
 
@@ -470,9 +511,13 @@
 
         <div class="footer">
             <p>
-                <i class="fas fa-shield-alt"></i> Dados processados localmente - Sem armazenamento em servidores<br>
-            
-            
+                <i class="fas fa-shield-alt"></i> LGPD: Dados processados localmente - Sem armazenamento em servidores<br>
+                <i class="fas fa-database"></i> Taxas de referência: Banco Central do Brasil - SGS (Dados Abertos)<br>
+                <i class="fas fa-balance-scale"></i> Análise preliminar - Consulte sempre um defensor público ou advogado especializado<br>
+                <i class="fas fa-envelope"></i> Dúvidas: <a href="mailto:calculos@defensoria.rs.def.br">calculos@defensoria.rs.def.br</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.75rem;">
+                <i class="fas fa-code-branch"></i> DPE-CALC Web - Desenvolvido pelo CATE/Cálculos e NUDECONTU
             </p>
         </div>
     </div>
@@ -498,9 +543,8 @@
             }
         });
 
-        // Simulação de dados BACEN (em produção, seria uma API real)
+        // Simulação de dados BACEN (em produção, seria API real)
         function simularDadosBACEN() {
-            // Dados simulados baseados na modalidade
             const modalidade = document.getElementById('modalidade').value;
             let mediaMensal = 0;
             
@@ -510,6 +554,7 @@
                 case '3': mediaMensal = 12.45; break; // Cartão de Crédito
                 case '4': mediaMensal = 1.89; break; // Financiamento Veículo
                 case '5': mediaMensal = 0.98; break; // Financiamento Imobiliário
+                case '6': mediaMensal = 2.15; break; // Crédito Consignado
                 default: mediaMensal = 5.00;
             }
             
@@ -522,7 +567,6 @@
         }
 
         function analisarJuros() {
-            // Mostrar loading
             document.getElementById('loadingOverlay').style.display = 'flex';
             
             setTimeout(() => {
@@ -535,59 +579,53 @@
                         return;
                     }
                     
-                    // Simular dados BACEN
                     const bacen = simularDadosBACEN();
                     const mediaMensal = bacen.mensal;
                     const mediaAnual = bacen.anual;
                     
-                    // Calcular parâmetros
                     const param20Mensal = mediaMensal * 1.2;
                     const param50Mensal = mediaMensal * 1.5;
                     const param20Anual = mediaAnual * 1.2;
                     const param50Anual = mediaAnual * 1.5;
                     
-                    // Preencher campos
-                    document.getElementById('taxaMensalBACEN').value = mediaMensal.toFixed(2);
-                    document.getElementById('taxaAnualBACEN').value = mediaAnual.toFixed(2);
-                    document.getElementById('parametro20Mensal').value = param20Mensal.toFixed(2);
-                    document.getElementById('parametro20Anual').value = param20Anual.toFixed(2);
-                    document.getElementById('parametro50Mensal').value = param50Mensal.toFixed(2);
-                    document.getElementById('parametro50Anual').value = param50Anual.toFixed(2);
+                    document.getElementById('taxaMensalBACEN').value = mediaMensal.toFixed(2) + '%';
+                    document.getElementById('taxaAnualBACEN').value = mediaAnual.toFixed(2) + '%';
+                    document.getElementById('parametro20Mensal').value = param20Mensal.toFixed(2) + '%';
+                    document.getElementById('parametro20Anual').value = param20Anual.toFixed(2) + '%';
+                    document.getElementById('parametro50Mensal').value = param50Mensal.toFixed(2) + '%';
+                    document.getElementById('parametro50Anual').value = param50Anual.toFixed(2) + '%';
                     
-                    // Análise de abusividade
                     let nivel = '';
                     let cor = '';
                     let mensagem = '';
                     let recomendacao = '';
                     
-                    const taxaAnualContratual = parseFloat(document.getElementById('taxaAnualContratual').value);
-                    
                     if (taxaMensalContratual > param50Mensal) {
                         nivel = 'ALTAMENTE ABUSIVO';
                         cor = '#ef4444';
                         mensagem = '⚠️ A taxa contratual ultrapassa em mais de 50% a média de mercado!';
-                        recomendacao = 'Recomenda-se ação revisional urgente. Probabilidade alta de êxito na redução dos juros.';
+                        recomendacao = 'Recomenda-se ação revisional urgente. Probabilidade alta de êxito na redução dos juros. Procure a Defensoria Pública.';
                     } else if (taxaMensalContratual > param20Mensal) {
                         nivel = 'POTENCIALMENTE ABUSIVO';
                         cor = '#f59e0b';
                         mensagem = '⚖️ A taxa contratual está entre 20% e 50% acima da média de mercado.';
-                        recomendacao = 'Há indícios de abusividade. Recomenda-se análise mais aprofundada por profissional.';
+                        recomendacao = 'Há indícios de abusividade. Recomenda-se análise mais aprofundada por um defensor público ou advogado.';
                     } else {
                         nivel = 'DENTRO DO PARÂMETRO';
                         cor = '#10b981';
                         mensagem = '✅ A taxa contratual está dentro do parâmetro de mercado.';
-                        recomendacao = 'Os juros estão em conformidade com a média do BACEN. Ação revisional improvável neste aspecto.';
+                        recomendacao = 'Os juros estão em conformidade com a média do BACEN. Ação revisional improvável neste aspecto específico.';
                     }
                     
-                    // Exibir resultado
                     const resultadoArea = document.getElementById('resultadoArea');
                     const conclusionCard = document.getElementById('conclusionCard');
                     
                     const nomeCliente = document.getElementById('nomeCliente').value || 'Cliente';
-                    const instituicao = document.getElementById('instituicao').value || 'instituição';
+                    const instituicao = document.getElementById('instituicao').value || 'instituição financeira';
+                    const dataAtual = new Date().toLocaleDateString('pt-BR');
                     
                     conclusionCard.innerHTML = `
-                        <h3><i class="fas fa-gavel"></i> Parecer Técnico</h3>
+                        <h3><i class="fas fa-gavel"></i> Parecer Técnico DPE-CALC</h3>
                         <div class="veredito" style="color: ${cor}">
                             <i class="fas ${nivel === 'DENTRO DO PARÂMETRO' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i> 
                             ${nivel}
@@ -595,27 +633,29 @@
                         <div class="detalhes">
                             <p><strong>Cliente:</strong> ${nomeCliente}</p>
                             <p><strong>Instituição:</strong> ${instituicao}</p>
-                            <p><strong>Data da Análise:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+                            <p><strong>Data da Análise:</strong> ${dataAtual}</p>
                             <hr style="margin: 1rem 0; border-color: #cbd5e1;">
                             <p><strong>Dados da Análise:</strong></p>
                             <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>Taxa Contratual: <strong>${taxaMensalContratual.toFixed(2)}% ao mês</strong> (${taxaAnualContratual.toFixed(2)}% ao ano)</li>
+                                <li>Taxa Contratual: <strong>${taxaMensalContratual.toFixed(2)}% ao mês</strong> (${(parseFloat(document.getElementById('taxaAnualContratual').value) || 0).toFixed(2)}% ao ano)</li>
                                 <li>Média BACEN: <strong>${mediaMensal.toFixed(2)}% ao mês</strong> (${mediaAnual.toFixed(2)}% ao ano)</li>
-                                <li>Parâmetro 20%: ${param20Mensal.toFixed(2)}% a.m.</li>
-                                <li>Parâmetro 50%: ${param50Mensal.toFixed(2)}% a.m.</li>
+                                <li>Parâmetro 20%: ${param20Mensal.toFixed(2)}% a.m. (${param20Anual.toFixed(2)}% a.a.)</li>
+                                <li>Parâmetro 50%: ${param50Mensal.toFixed(2)}% a.m. (${param50Anual.toFixed(2)}% a.a.)</li>
                             </ul>
                             <hr style="margin: 1rem 0; border-color: #cbd5e1;">
                             <p><strong>${mensagem}</strong></p>
                             <p style="margin-top: 1rem;">${recomendacao}</p>
-                            <p style="margin-top: 1rem; font-size: 0.9rem; background: white; padding: 1rem; border-radius: 0.7rem;">
-                                <i class="fas fa-balance-scale"></i> <strong>Nota importante:</strong> Esta análise é preliminar e baseada exclusivamente no critério quantitativo de juros. Outros vícios contratuais (capitalização, comissão de permanência, taxas abusivas) devem ser analisados por profissional habilitado.
+                            <p style="margin-top: 1rem; font-size: 0.9rem; background: white; padding: 1rem; border-radius: 0.7rem; border-left: 3px solid #ffcc00;">
+                                <i class="fas fa-balance-scale"></i> <strong>Nota importante:</strong> Esta análise é preliminar e baseada exclusivamente no critério quantitativo de juros (Súmula 381 do STJ). Outros vícios contratuais (capitalização de juros, comissão de permanência, taxas abusivas) devem ser analisados por profissional habilitado.
+                            </p>
+                            <p style="margin-top: 1rem; font-size: 0.85rem; text-align: center;">
+                                <i class="fas fa-building"></i> Defensoria Pública do Estado do Rio Grande do Sul - NUDECONTU<br>
+                                <i class="fas fa-phone"></i> Central de Atendimento: (51) 3224-5566
                             </p>
                         </div>
                     `;
                     
                     resultadoArea.style.display = 'block';
-                    
-                    // Scroll suave para o resultado
                     resultadoArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     
                 } catch (error) {
@@ -624,7 +664,7 @@
                 } finally {
                     document.getElementById('loadingOverlay').style.display = 'none';
                 }
-            }, 1000); // Simular tempo de consulta à API
+            }, 1000);
         }
         
         function limparFormulario() {
@@ -644,11 +684,8 @@
             document.getElementById('resultadoArea').style.display = 'none';
         }
         
-        // Inicializar com valores de exemplo
         window.addEventListener('load', () => {
-            // Valores demo para teste
-            document.getElementById('taxaMensalContratual').value = '5.89';
-            document.getElementById('taxaMensalContratual').dispatchEvent(new Event('input'));
+            document.getElementById('taxaMensalContratual').value = '';
         });
     </script>
 </body>
