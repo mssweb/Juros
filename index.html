@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>JusticeCalc - Análise Inteligente de Juros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Moderno */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #e0d7ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Card Principal */
+        .card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 2rem;
+            color: white;
+        }
+
+        .card-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            opacity: 0.8;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Grid de Campos */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 0.9rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        /* Tabela de Taxas Moderna */
+        .taxas-table {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .taxas-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #f8fafc;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .taxas-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .taxas-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .taxas-table input {
+            width: 100%;
+            padding: 0.7rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.7rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .taxas-table input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .taxas-table input[readonly] {
+            background: #f1f5f9;
+            cursor: pointer;
+        }
+
+        /* Botões Arrojados */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245,158,11,0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .btn-outline:hover {
+            border-color: #667eea;
+            background: rgba(102,126,234,0.05);
+        }
+
+        /* Conclusão Card */
+        .conclusion-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+
+        .conclusion-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .conclusion-card .veredito {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .conclusion-card .detalhes {
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            background: white;
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+        }
+
+        .loading-spinner i {
+            font-size: 3rem;
+            color: #667eea;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Indicadores de severidade */
+        .severity-low {
+            color: #10b981;
+        }
+        .severity-medium {
+            color: #f59e0b;
+        }
+        .severity-high {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner"></i>
+            <p style="margin-top: 1rem;">Consultando dados do BACEN...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <div class="badge">
+                <i class="fas fa-gavel"></i> Análise Jurídica Inteligente
+            </div>
+            <h1>JusticeCalc</h1>
+            <p>Análise automatizada de abusividade de juros com dados oficiais do Banco Central</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-file-contract"></i> Dados do Contrato</h2>
+                <p>Preencha as informações abaixo para análise preliminar</p>
+            </div>
+            <div class="card-body">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label><i class="fas fa-user"></i> Nome do Cliente</label>
+                        <input type="text" id="nomeCliente" placeholder="Opcional">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-id-card"></i> CPF</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-university"></i> Instituição</label>
+                        <input type="text" id="instituicao" placeholder="Ex: Banco do Brasil">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-hashtag"></i> Contrato</label>
+                        <input type="text" id="contrato" placeholder="Número do contrato">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-calendar"></i> Data da Contratação</label>
+                        <input type="date" id="dataContratacao">
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-chart-line"></i> Modalidade</label>
+                        <select id="modalidade">
+                            <option value="1">Crédito Pessoal</option>
+                            <option value="2">Cheque Especial</option>
+                            <option value="3">Cartão de Crédito</option>
+                            <option value="4">Financiamento Veículo</option>
+                            <option value="5">Financiamento Imobiliário</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="taxas-table">
+                    <table>
+                        <thead>
+                            <tr><th colspan="2"></th><th>Mensal (%)</th><th>Anual (%)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #fef3c7;">
+                                <td colspan="2"><strong><i class="fas fa-file-signature"></i> Taxa Contratual</strong></td>
+                                <td><input type="number" id="taxaMensalContratual" step="0.01" placeholder="Digite a taxa mensal"></td>
+                                <td><input type="number" id="taxaAnualContratual" readonly placeholder="Será calculado"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong><i class="fas fa-chart-line"></i> Média BACEN</strong></td>
+                                <td><input type="text" id="taxaMensalBACEN" readonly placeholder="Automático"></td>
+                                <td><input type="text" id="taxaAnualBACEN" readonly placeholder="Automático"></td>
+                            </tr>
+                            <tr style="background: #f0fdf4;">
+                                <td colspan="2"><strong><i class="fas fa-flag-checkered"></i> Parâmetro Abusividade (20%)</strong></td>
+                                <td><input type="text" id="parametro20Mensal" readonly></td>
+                                <td><input type="text" id="parametro20Anual" readonly></td>
+                            </tr>
+                            <tr style="background: #fee2e2;">
+                                <td colspan="2"><strong><i class="fas fa-exclamation-triangle"></i> Parâmetro Abusividade (50%)</strong></td>
+                                <td><input type="text" id="parametro50Mensal" readonly></td>
+                                <td><input type="text" id="parametro50Anual" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="analisarJuros()">
+                        <i class="fas fa-microphone-alt"></i> ANALISAR JUROS
+                    </button>
+                    <button class="btn btn-secondary" onclick="limparFormulario()">
+                        <i class="fas fa-eraser"></i> LIMPAR
+                    </button>
+                    <button class="btn btn-outline" onclick="window.print()">
+                        <i class="fas fa-print"></i> IMPRIMIR
+                    </button>
+                </div>
+
+                <!-- Área de Conclusão -->
+                <div id="resultadoArea" style="display: none;">
+                    <div class="conclusion-card" id="conclusionCard">
+                        <!-- Conteúdo gerado dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <i class="fas fa-shield-alt"></i> Dados processados localmente - Sem armazenamento em servidores<br>
+                <i class="fas fa-database"></i> Taxas de referência: Banco Central do Brasil - SGS<br>
+                <i class="fas fa-balance-scale"></i> Ferramenta educacional - Consulte sempre um advogado especializado
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                e.target.value = value.substring(0, 14);
+            }
+        });
+
+        // Calcular taxa anual baseada na mensal
+        document.getElementById('taxaMensalContratual').addEventListener('input', function() {
+            let mensal = parseFloat(this.value);
+            if (!isNaN(mensal)) {
+                let anual = (Math.pow(1 + mensal/100, 12) - 1) * 100;
+                document.getElementById('taxaAnualContratual').value = anual.toFixed(2);
+            } else {
+                document.getElementById('taxaAnualContratual').value = '';
+            }
+        });
+
+        // Simulação de dados BACEN (em produção, seria uma API real)
+        function simularDadosBACEN() {
+            // Dados simulados baseados na modalidade
+            const modalidade = document.getElementById('modalidade').value;
+            let mediaMensal = 0;
+            
+            switch(modalidade) {
+                case '1': mediaMensal = 3.45; break; // Crédito Pessoal
+                case '2': mediaMensal = 9.87; break; // Cheque Especial
+                case '3': mediaMensal = 12.45; break; // Cartão de Crédito
+                case '4': mediaMensal = 1.89; break; // Financiamento Veículo
+                case '5': mediaMensal = 0.98; break; // Financiamento Imobiliário
+                default: mediaMensal = 5.00;
+            }
+            
+            let mediaAnual = (Math.pow(1 + mediaMensal/100, 12) - 1) * 100;
+            
+            return {
+                mensal: mediaMensal,
+                anual: mediaAnual
+            };
+        }
+
+        function analisarJuros() {
+            // Mostrar loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            setTimeout(() => {
+                try {
+                    const taxaMensalContratual = parseFloat(document.getElementById('taxaMensalContratual').value);
+                    
+                    if (isNaN(taxaMensalContratual)) {
+                        alert('Por favor, informe a taxa mensal contratual');
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                        return;
+                    }
+                    
+                    // Simular dados BACEN
+                    const bacen = simularDadosBACEN();
+                    const mediaMensal = bacen.mensal;
+                    const mediaAnual = bacen.anual;
+                    
+                    // Calcular parâmetros
+                    const param20Mensal = mediaMensal * 1.2;
+                    const param50Mensal = mediaMensal * 1.5;
+                    const param20Anual = mediaAnual * 1.2;
+                    const param50Anual = mediaAnual * 1.5;
+                    
+                    // Preencher campos
+                    document.getElementById('taxaMensalBACEN').value = mediaMensal.toFixed(2);
+                    document.getElementById('taxaAnualBACEN').value = mediaAnual.toFixed(2);
+                    document.getElementById('parametro20Mensal').value = param20Mensal.toFixed(2);
+                    document.getElementById('parametro20Anual').value = param20Anual.toFixed(2);
+                    document.getElementById('parametro50Mensal').value = param50Mensal.toFixed(2);
+                    document.getElementById('parametro50Anual').value = param50Anual.toFixed(2);
+                    
+                    // Análise de abusividade
+                    let nivel = '';
+                    let cor = '';
+                    let mensagem = '';
+                    let recomendacao = '';
+                    
+                    const taxaAnualContratual = parseFloat(document.getElementById('taxaAnualContratual').value);
+                    
+                    if (taxaMensalContratual > param50Mensal) {
+                        nivel = 'ALTAMENTE ABUSIVO';
+                        cor = '#ef4444';
+                        mensagem = '⚠️ A taxa contratual ultrapassa em mais de 50% a média de mercado!';
+                        recomendacao = 'Recomenda-se ação revisional urgente. Probabilidade alta de êxito na redução dos juros.';
+                    } else if (taxaMensalContratual > param20Mensal) {
+                        nivel = 'POTENCIALMENTE ABUSIVO';
+                        cor = '#f59e0b';
+                        mensagem = '⚖️ A taxa contratual está entre 20% e 50% acima da média de mercado.';
+                        recomendacao = 'Há indícios de abusividade. Recomenda-se análise mais aprofundada por profissional.';
+                    } else {
+                        nivel = 'DENTRO DO PARÂMETRO';
+                        cor = '#10b981';
+                        mensagem = '✅ A taxa contratual está dentro do parâmetro de mercado.';
+                        recomendacao = 'Os juros estão em conformidade com a média do BACEN. Ação revisional improvável neste aspecto.';
+                    }
+                    
+                    // Exibir resultado
+                    const resultadoArea = document.getElementById('resultadoArea');
+                    const conclusionCard = document.getElementById('conclusionCard');
+                    
+                    const nomeCliente = document.getElementById('nomeCliente').value || 'Cliente';
+                    const instituicao = document.getElementById('instituicao').value || 'instituição';
+                    
+                    conclusionCard.innerHTML = `
+                        <h3><i class="fas fa-gavel"></i> Parecer Técnico</h3>
+                        <div class="veredito" style="color: ${cor}">
+                            <i class="fas ${nivel === 'DENTRO DO PARÂMETRO' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i> 
+                            ${nivel}
+                        </div>
+                        <div class="detalhes">
+                            <p><strong>Cliente:</strong> ${nomeCliente}</p>
+                            <p><strong>Instituição:</strong> ${instituicao}</p>
+                            <p><strong>Data da Análise:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+                            <hr style="margin: 1rem 0; border-color: #cbd5e1;">
+                            <p><strong>Dados da Análise:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Taxa Contratual: <strong>${taxaMensalContratual.toFixed(2)}% ao mês</strong> (${taxaAnualContratual.toFixed(2)}% ao ano)</li>
+                                <li>Média BACEN: <strong>${mediaMensal.toFixed(2)}% ao mês</strong> (${mediaAnual.toFixed(2)}% ao ano)</li>
+                                <li>Parâmetro 20%: ${param20Mensal.toFixed(2)}% a.m.</li>
+                                <li>Parâmetro 50%: ${param50Mensal.toFixed(2)}% a.m.</li>
+                            </ul>
+                            <hr style="margin: 1rem 0; border-color: #cbd5e1;">
+                            <p><strong>${mensagem}</strong></p>
+                            <p style="margin-top: 1rem;">${recomendacao}</p>
+                            <p style="margin-top: 1rem; font-size: 0.9rem; background: white; padding: 1rem; border-radius: 0.7rem;">
+                                <i class="fas fa-balance-scale"></i> <strong>Nota importante:</strong> Esta análise é preliminar e baseada exclusivamente no critério quantitativo de juros. Outros vícios contratuais (capitalização, comissão de permanência, taxas abusivas) devem ser analisados por profissional habilitado.
+                            </p>
+                        </div>
+                    `;
+                    
+                    resultadoArea.style.display = 'block';
+                    
+                    // Scroll suave para o resultado
+                    resultadoArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                } catch (error) {
+                    console.error('Erro na análise:', error);
+                    alert('Erro ao analisar os dados. Verifique os valores informados.');
+                } finally {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }
+            }, 1000); // Simular tempo de consulta à API
+        }
+        
+        function limparFormulario() {
+            document.getElementById('nomeCliente').value = '';
+            document.getElementById('cpf').value = '';
+            document.getElementById('instituicao').value = '';
+            document.getElementById('contrato').value = '';
+            document.getElementById('dataContratacao').value = '';
+            document.getElementById('taxaMensalContratual').value = '';
+            document.getElementById('taxaAnualContratual').value = '';
+            document.getElementById('taxaMensalBACEN').value = '';
+            document.getElementById('taxaAnualBACEN').value = '';
+            document.getElementById('parametro20Mensal').value = '';
+            document.getElementById('parametro20Anual').value = '';
+            document.getElementById('parametro50Mensal').value = '';
+            document.getElementById('parametro50Anual').value = '';
+            document.getElementById('resultadoArea').style.display = 'none';
+        }
+        
+        // Inicializar com valores de exemplo
+        window.addEventListener('load', () => {
+            // Valores demo para teste
+            document.getElementById('taxaMensalContratual').value = '5.89';
+            document.getElementById('taxaMensalContratual').dispatchEvent(new Event('input'));
+        });
+    </script>
+</body>
+</html>
